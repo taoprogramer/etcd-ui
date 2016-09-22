@@ -4,7 +4,7 @@ from etcd import Client, EtcdKeyNotFound
 
 app = Flask(__name__)
 
-cli = Client(host='10.18.19.69', port=4001)
+cli = Client(host='localhost', port=4001)
 
 
 to_json = lambda node: dict([(attr, getattr(node, attr)) for attr in node._node_props])
