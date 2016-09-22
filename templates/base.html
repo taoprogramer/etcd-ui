@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+    <title>Starter Template - Materialize</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="/static/css/materialize.min.css">
+    <style>
+        body {
+            font-size: 14px;
+        }
+
+        input {
+            font-size: 14px !important;
+        }
+    </style>
+</head>
+<body>
+<nav class="light-blue lighten-1" role="navigation">
+    <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">etcd</a>
+        <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+    </div>
+</nav>
+<div class="container" id="app">
+    <div class="section">
+        <div class="row">
+            <div class="col s12 ">
+                <blockquote>
+                    click the breadcrumbs to back to the top level .
+                </blockquote>
+                <nav>
+                    <div class="nav-wrapper">
+                        <div class="col s12">
+                            <template v-for="path in bar">
+                                <a :href="path.full" class="breadcrumb" v-on:click.prevent="select(path.full)">${path.key}</a>
+                            </template>
+
+                        </div>
+                    </div>
+                </nav>
+            </div>
+
+
+        </div>
+
+
+        <div class="row">
+            <div class="col s12 m6">
+                <blockquote>
+                    click the list item to show detail and enter this directory .
+                </blockquote>
+                <div class="collection">
+                    <template v-for="child in current.children">
+                        <a :href="child.key" class="collection-item"
+                           v-on:click.prevent="select(child.key)">
+                            ${child.key}
+                            <template v-if="child.dir">
+                                <span class="new badge" data-badge-caption="dir"></span>
+                            </template>
+                        </a>
+                    </template>
+
+                </div>
+            </div>
+
+            <div class="col s12 m6 ">
+                <div class="row">
+                    <form class="col s12">
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input type="text" class="validate" v-model="current.key">
+                                <label class="active">key</label>
+                            </div>
+                            <div class="input-field col s12">
+                                <input type="text" class="validate" v-model="current.value">
+                                <label class="active">Value</label>
+                            </div>
+                            <div class="input-field col s12">
+                                <input type="text" class="validate" v-model="current.expiration" disabled>
+                                <label class="active">expiration</label>
+                            </div>
+                            <div class="input-field col s3">
+                                <input type="text" class="validate" v-model="current.ttl">
+                                <label class="active">ttl</label>
+                            </div>
+                            <div class="input-field col s3">
+                                <input type="text" class="validate" v-model="current.dir">
+                                <label class="active">dir</label>
+                            </div>
+
+                            <div class="input-field col s3">
+                                <input type="text" class="validate" disabled v-model="current.createdIndex">
+                                <label class="active">createdIndex</label>
+                            </div>
+                            <div class="input-field col s3">
+                                <input type="text" class="validate" disabled v-model="current.modifiedIndex">
+                                <label class="active">modifiedIndex</label>
+                            </div>
+
+                            <div class="input-field col s12">
+                                <a class="waves-effect waves-light btn" v-on:click="setKey()">PUT</a>
+                                <a class="waves-effect waves-light btn red" v-on:click="deleteKey()">DELETE</a>
+                            </div>
+
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+    <br><br>
+
+    <div class="section">
+
+    </div>
+</div>
+
+
+<script src="/static/js/vender/vue.min.js"></script>
+<script src="/static/js/vender/vue-resource.min.js"></script>
+<script src="/static/js/app.js"></script>
+</body>
+</html>
