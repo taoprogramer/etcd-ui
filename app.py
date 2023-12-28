@@ -6,12 +6,12 @@ app = Flask(__name__)
 
 cli = Client(host='localhost', port=4001)
 
-
 to_json = lambda node: dict([(attr, getattr(node, attr)) for attr in node._node_props])
 
 
 @app.route('/')
 def base():
+    # this is the base html
     return render_template('base.html')
 
 
