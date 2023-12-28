@@ -27,7 +27,7 @@ def proxy():
             return jsonify(**context)
         except EtcdKeyNotFound:
             return jsonify({})
-
+ 
     if request.method == 'PUT':
         key = request.get_json().get('key', '')
         value = request.get_json().get('value', '')
